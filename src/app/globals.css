@@ -99,8 +99,11 @@
 
   .sliderValue {
     @apply justify-self-end;
-    margin-right: 10%;
-    text-align: end;
+    margin-right: 20%;
+    align-self: center;
+    /* make fullwidth light gray font */
+    color: rgba(255, 255, 255, 0.85);
+    font: 1rem 'Fira Code', monospace;
   }
 
   .container {
@@ -109,8 +112,13 @@
   }
 
   .colorBox {
-    @apply justify-self-center w-full ml-4;
+    @apply justify-self-center w-full ml-2;
+    height: 100%;
     border: solid rgba(255, 255, 255, 0.5);
+  }
+  
+  .colorBoxContainer {
+    min-width: 1.5rem;
   }
 
   .slider {
@@ -123,11 +131,13 @@
   }
 
   .sliderLabel {
-    @apply z-10 w-auto pr-1.5;
+    @apply z-10 w-auto pr-1.5 overflow-auto;
+    grid-template-columns: 1fr 1fr;
+    display: grid;
   }
 
-  .buttonContainer {
-    @apply grid gap-4;
+  .valueSeparator {
+    justify-self: end;
   }
 
   .guideAccordion, .creditsAccordion {
@@ -147,6 +157,7 @@
   }
 
   .sliderContainer {
+    margin: 0 -5vw;
     /* Adjust to use CSS columns instead of flexbox for automatic column distribution */
     -webkit-column-count: 2; /* Chrome, Safari, Opera */
     -moz-column-count: 2; /* Firefox */
@@ -155,7 +166,8 @@
 
   .cardContent {
     @apply grid;
-    grid-template-columns: 1fr 3rem minmax(7vw, 2fr) min-content;
+    grid-template-columns: 1fr 5rem minmax(7vw, 1fr) min-content;
+    grid-row-gap: 0.5rem;
   }
 
   .card {
@@ -169,21 +181,58 @@
     break-inside: avoid-column; /* Standard syntax */
   }
 
-  /* Lets SliderThumb sit on edge of SliderTrack */
-  .SliderTrack {
-    height: 1rem;
-    flex-grow: 0;
-    margin: 0 0.5rem;
+  .SliderThumb {
+    transform: scale(1.5);
   }
 
-  @media (max-width: 1023px) {
+  /* Lets SliderThumb sit on edge of SliderTrack */
+  .SliderTrack {
+    height: 1.25rem;
+    flex-grow: 0;
+    margin: 0 0.25rem;
+  }
+
+  .downloadButton {
+    @apply w-full mt-2;
+  }
+
+  @media (min-width: 1360px) {
+    .sliderContainer {
+      -webkit-column-count: 3;
+      -moz-column-count: 3;
+      column-count: 3;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .valueSeparator {
+      display: none;
+    }
     .sliderContainer {
       -webkit-column-count: 1;
       -moz-column-count: 1;
       column-count: 1;
+      margin: 0;
     }
+
+    .SliderTrack {
+      height: 1.5rem;
+    }
+    /* scale up sliderthumb relative */
+    .SliderThumb {
+      transform: scale(2.5);
+    }
+
     .container {
       max-width: 100%;
     }
+    .cardContent {
+      grid-template-columns: 1fr min-content;
+    }
+    .cardContent > .slider, .cardContent > .colorBoxContainer {
+      border-bottom: 2px solid rgba(255, 255, 255, 0.452);
+      @apply pb-4 mb-4;
+    }
+    
   }
 }

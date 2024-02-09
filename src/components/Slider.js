@@ -30,7 +30,10 @@ export default function Slider({
 
   return (
     <>
-      <div className="sliderLabel">{directiveKey}:</div>
+      <div className="sliderLabel">
+        <span>{directiveKey}</span>
+        <span className="valueSeparator">:</span>
+      </div>
       <div className="sliderValue">{parseFloat(value).toFixed(2)}</div>
       <div className={sliderElementClass}>
         <UiSlider
@@ -43,13 +46,14 @@ export default function Slider({
         />
       </div>
       {hexColor ? (
-        <div
-          className="colorBox"
-          style={{
-            height: "20px",
-            backgroundColor: hexColor,
-          }}
-        ></div>
+        <div className="colorBoxContainer">
+          <div
+            className="colorBox"
+            style={{
+              backgroundColor: hexColor,
+            }}
+          ></div>
+        </div>
       ) : null}
     </>
   );

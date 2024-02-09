@@ -14,5 +14,5 @@ export default function DownloadButton({ paramsDict }) {
     element.click();
   };
 
-  return <Button variant="outline" onClick={handleDownload}>Download Modified Params</Button>;
+  return <Button className="downloadButton" variant="outline" onClick={handleDownload}>Download Modified Params</Button>;
 }
