@@ -12,7 +12,7 @@ export default function MarkdownCreditsAccordion() {
     const content = `
 - *bay40k (me)*
 - *psp2wpp creator* - ***[https://github.com/Princess-of-Sleeping/psp2wpp](https://github.com/Princess-of-Sleeping/psp2wpp)***
-- */u/Havocking1992* for some value descriptions and tutorials
+- *Havocking1992* for some value descriptions and tutorials
 - *smokeanthrax*
 `
     return (
