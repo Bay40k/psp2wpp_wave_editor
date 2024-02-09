@@ -2,32 +2,188 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    background-color: black;
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+/* Global styles outside of Tailwind's layers should be placed in a global CSS file or within the @layer utilities for consistency */
 
 @layer utilities {
+  p {
+    margin: 1.5rem 0;
+  }
+
+  h1 {
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4;
+  }
+
+  h2 {
+    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-2 mt-5;
+  }
+
+  h3 {
+    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+  }
+
+  li {
+    @apply my-0 ml-6 list-disc text-base;
+  }
+
+  p {
+    @apply text-lg;
+  }
+
+  a {
+    color: #edc6ff;
+  }
+
+  ol {
+    @apply list-decimal list-inside pl-4;
+  }
+
+  img {
+    width: 40vw;
+  }
+
   .text-balance {
     text-wrap: balance;
+  }
+
+  .sliderSectionHeader {
+    @apply text-center font-bold text-2xl;
+    grid-column: span 4;
+  }
+
+  .sliderValue {
+    @apply justify-self-end;
+    margin-right: 10%;
+    text-align: end;
+  }
+
+  .container {
+    max-width: 80vw;
+    /* margin: 0 20vw; */
+  }
+
+  .colorBox {
+    @apply justify-self-center w-full ml-4;
+    border: solid rgba(255, 255, 255, 0.5);
+  }
+
+  .slider {
+    align-self: center;
+    grid-column: auto / span 1;
+  }
+
+  .sliderSpanDouble {
+    grid-column: auto / span 2; /* Span 2 columns when hexColor is blank */
+  }
+
+  .sliderLabel {
+    @apply z-10 w-auto pr-1.5;
+  }
+
+  .buttonContainer {
+    @apply grid gap-4;
+  }
+
+  .guideAccordion, .creditsAccordion {
+    @apply mb-4;
+  }
+
+  .guideAccordionText, .creditsAccordionText {
+    @apply font-bold text-xl py-2;
+  }
+
+  .creditsAccordionText {
+    @apply pt-0;
+  }
+
+  .creditsMarkdown > * {
+    @apply my-0;
+  }
+
+  .sliderContainer {
+    /* Adjust to use CSS columns instead of flexbox for automatic column distribution */
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2; /* Standard syntax */
+  }
+
+  .cardContent {
+    @apply grid;
+    grid-template-columns: 1fr 3rem minmax(7vw, 2fr) min-content;
+  }
+
+  .card {
+    @apply mb-4;
+  }
+
+  .noColumnBreak {
+    /* Ensure the box doesn't break across columns */
+    -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+    page-break-inside: avoid; /* Firefox */
+    break-inside: avoid-column; /* Standard syntax */
+  }
+
+  /* Lets SliderThumb sit on edge of SliderTrack */
+  .SliderTrack {
+    height: 1rem;
+    flex-grow: 0;
+    margin: 0 0.5rem;
+  }
+
+  @media (max-width: 1023px) {
+    .sliderContainer {
+      -webkit-column-count: 1;
+      -moz-column-count: 1;
+      column-count: 1;
+    }
+    .container {
+      max-width: 100%;
+    }
   }
 }
