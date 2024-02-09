@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import remarkGfm from "remark-gfm";
 import { useState } from "react";
+import Image from "next/image";
 
 // The component that takes markdown content as a prop
 export default function MarkdownGuideAccordion() {
@@ -39,6 +40,10 @@ export default function MarkdownGuideAccordion() {
                   .replace(/[^\w-]+/g, "");
                 return <h2 id={id} {...props} />;
               },
+              // Override img elements to use Next.js Image component
+              img: ({ src, alt }) => {
+                return <Image height="1" width="1" src={src} alt={alt} layout="responsive" />
+              }
             }}
           >
             {guide}
