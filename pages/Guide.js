@@ -40,7 +40,7 @@ export default function MarkdownGuideAccordion() {
                   .replace(/[^\w-]+/g, "");
                 return <h2 id={id} {...props} />;
               },
-              // Override img elements to use Next.js Image component
+              // Override img elements to prepend the base path
               img: ({ src, ...props }) => {
                 return <img src={`${basePath}${src}`} {...props} />
               }
