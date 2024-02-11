@@ -96,13 +96,13 @@ Below are screenshots of the major settings and their effects. Settings not list
 
 ## Sky
 
-### theta
-- Value range: -1 to 1
-- theta[0] = -1
+### theta_phi
+- Value range: -10 to 10
+- theta_phi[0] = -1
   ![](/guide/2024-02-07-071519.png)
-- theta[0] = 1
+- theta_phi[0] = 1
   ![](/guide/2024-02-07-071609.png)
-- theta[1] = 1
+- theta_phi[1] = 1
   ![](/guide/2024-02-07-071647.png)
 ### distance
 - Value range: 0 - 10
