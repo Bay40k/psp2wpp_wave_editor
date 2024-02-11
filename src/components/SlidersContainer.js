@@ -18,50 +18,42 @@ export default function SlidersContainer({ paramsDict, onUpdateParamsDict }) {
   };
 
   const getSliderProps = (key) => {
+    const defaultProps = { min: 0, max: 100, step: 0.01 }; // Default props
     // Conditions for slider props based on key
     const sliderPropsConditions = [
       {
-        check: (key) => key.includes("theta_phi"),
-        props: { min: -360, max: 360, step: 1 },
-      },
-      {
-        check: (key) => key.includes("translation") || key.includes("rotation"),
-        props: { min: -5, max: 5, step: 0.01 },
-      },
-      {
-        check: (key) =>
-          key.includes("distance") || key.includes("global_scale"),
-        props: { min: 0, max: 100, step: 1 },
+        check: (key) => key.includes("translation") || key.includes("rotation") || key.includes("cross_section"),
+        props: {...defaultProps, min: key.includes(".w") ? 0.01 : -5, max: 5},
       },
       {
         check: (key) => key.includes("density"),
-        props: { min: 1, max: 10, step: 0.1 },
+        props: {...defaultProps, min: 1, max: 10},
       },
       {
         check: (key) =>
           key.includes("pitch") ||
           key.includes("roll") ||
           key.includes("zoom") ||
-          key.includes("wind_dir"),
-        props: { min: -10, max: 10, step: 0.1 },
+          key.includes("wind_dir") ||
+          key.includes("theta_phi"),
+        props: { ...defaultProps, min: -10, max: 10 },
       },
       {
         check: (key) => key === "uv_scale",
-        props: { min: 0.1, max: 1, step: 0.01 },
+        props: { ...defaultProps, min: 0.1, max: 1 },
       },
       {
         check: (key) => key === "uv_rotate",
-        props: { min: 0, max: 360, step: 1 },
+        props: { ...defaultProps, max: 360, step: 1 },
       },
       {
         check: (key) =>
-          key === "theta" ||
           key === "side_angle" ||
           key === "horizon_angle" ||
           key === "horizon_blend_range" ||
           key === "horizon_curvature" ||
           key === "sky_blend",
-        props: { min: -1, max: 1, step: 0.01 },
+        props: { ...defaultProps, min: -1, max: 1 },
       },
       {
         check: (key) =>
@@ -70,23 +62,23 @@ export default function SlidersContainer({ paramsDict, onUpdateParamsDict }) {
           key === "A" ||
           key === "sky_blend_range" ||
           key === "fade",
-        props: { min: 0, max: 10, step: 0.1 },
+        props: { ...defaultProps, max: 10 },
       },
       {
         check: (key) => key === "gravity",
-        props: { min: 0, max: 20, step: 0.1 },
+        props: { ...defaultProps, max: 20 },
       },
       {
         check: (key) => key === "logA",
-        props: { min: -30, max: -10, step: 1 },
+        props: { ...defaultProps, min: -30, max: -10 },
       },
       {
         check: (key) => key === "patch_size",
-        props: { min: 0, max: 1000, step: 1 },
+        props: { ...defaultProps, max: 1000, step: 1 },
       },
       {
         check: (key) => key === "wind",
-        props: { min: 0, max: 100, step: 1 },
+        props: { ...defaultProps, max: 100, step: 1 },
       },
       {
         check: (key) =>
@@ -98,8 +90,12 @@ export default function SlidersContainer({ paramsDict, onUpdateParamsDict }) {
           key.includes("edge_fog") ||
           key.includes("distortion_scale") ||
           key === "wave_fog_alpha",
-        props: { min: 0, max: 1, step: 0.01 },
+        props: { ...defaultProps, max: 1 },
       },
+      {
+        check: (key) => key.includes("scale"),
+        props: { ...defaultProps, min: key.includes(".w") ? 0.01 : defaultProps.min },
+      }
     ];
 
     // Find the first condition that matches the key and return its props
@@ -108,7 +104,7 @@ export default function SlidersContainer({ paramsDict, onUpdateParamsDict }) {
     );
     return matchingCondition
       ? matchingCondition.props
-      : { min: 0, max: 100, step: 0.01 }; // Default props
+      : defaultProps; // Return default props if no matching condition is found
   };
 
   const getColorValues = (typeKey, key) => {
