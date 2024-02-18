@@ -12,17 +12,17 @@ function createWindow() {
       contextIsolation: true,
       webviewTag: true, // Make sure this is set to true
     },
-    preload: `./preload.js`, // Use a preload script
+    preload: path.join(__dirname, 'preload.js')
   });
 
   // Load the index.html file
-  win.loadFile("index.html");
+  win.loadFile(path.join(__dirname, '../../public/index.html'));
 
   // Intercept file downloads
   const webContentSession = win.webContents.session; // For default session
   webContentSession.on("will-download", (event, item, webContents) => {
     // Set the save path, making Electron not to prompt a save dialog
-    const savePath = path.resolve("./downloads", item.getFilename());
+    const savePath = path.resolve("./downloads", item.getFilename());    
     item.setSavePath(savePath);
     console.log(`Saving to ${savePath}`);
 
