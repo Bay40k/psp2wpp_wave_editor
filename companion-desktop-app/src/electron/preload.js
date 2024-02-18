@@ -1,5 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
+console.log('preload.js loaded');
 contextBridge.exposeInMainWorld('electronAPI', {
-    sendDownloadButtonClick: (buttonId) => ipcRenderer.send('download-button-clicked', buttonId),
+    receiveSavePath: (callback) => ipcRenderer.on('download-complete', (event, ...args) => callback(...args)),
 });

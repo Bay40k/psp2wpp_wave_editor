@@ -31,6 +31,7 @@ function createWindow() {
     item.once("done", (event, state) => {
       if (state === "completed") {
         console.log(`Downloaded successfully to ${savePath}`);
+        win.webContents.send('download-complete', savePath);
       } else {
         console.error(`Download failed: ${state}`);
       }
